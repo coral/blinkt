@@ -28,7 +28,7 @@ const IDX_RED: usize = 3;
 /// A pixel on an LED strip or board.
 #[derive(Debug, Copy, Clone)]
 pub struct Pixel {
-    value: [u8; 4], // Brightness, blue, green, red
+    pub value: [u8; 4], // Brightness, blue, green, red
 }
 
 impl Pixel {
