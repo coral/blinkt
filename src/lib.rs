@@ -260,7 +260,7 @@ impl SerialOutput for BlinktGpio {
     }
 }
 
-struct BlinktSpi {
+pub struct BlinktSpi {
     spi: spi::Spi,
 }
 
