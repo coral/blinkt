@@ -215,7 +215,7 @@ impl From<SpiError> for Error {
 /// Result type returned from methods that can have `blinkt::Error`s.
 pub type Result<T> = result::Result<T, Error>;
 
-trait SerialOutput {
+pub trait SerialOutput {
     fn write(&mut self, data: &[u8]) -> Result<()>;
 }
 
