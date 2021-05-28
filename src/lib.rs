@@ -292,10 +292,10 @@ impl SerialOutput for BlinktSpi {
 /// data pin GPIO 23 (physical pin 16) and clock pin GPIO 24 (physical pin 18).
 /// These settings can be changed to support alternate configurations.
 pub struct Blinkt {
-    serial_output: Box<dyn SerialOutput + Send>,
-    pixels: Vec<Pixel>,
-    clear_on_drop: bool,
-    end_frame: Vec<u8>,
+    pub serial_output: Box<dyn SerialOutput + Send>,
+    pub pixels: Vec<Pixel>,
+    pub clear_on_drop: bool,
+    pub end_frame: Vec<u8>,
 }
 
 impl Blinkt {
