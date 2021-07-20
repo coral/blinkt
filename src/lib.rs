@@ -275,6 +275,12 @@ impl BlinktSpi {
             )?,
         })
     }
+
+    pub fn with_bus(clock_speed_hz: u32, bus: spi::Bus) -> Result<BlinktSpi> {
+        Ok(BlinktSpi {
+            spi: spi::Spi::new(bus, spi::SlaveSelect::Ss0, clock_speed_hz, spi::Mode::Mode0)?,
+        })
+    }
 }
 
 impl SerialOutput for BlinktSpi {
@@ -335,6 +341,15 @@ impl Blinkt {
     pub fn with_spi(clock_speed_hz: u32, num_pixels: usize) -> Result<Blinkt> {
         Ok(Blinkt {
             serial_output: Box::new(BlinktSpi::with_settings(clock_speed_hz)?),
+            pixels: vec![Pixel::default(); num_pixels],
+            clear_on_drop: true,
+            end_frame: vec![0u8; 4 + (((num_pixels as f32 / 16.0f32) + 0.94f32) as usize)],
+        })
+    }
+
+    pub fn with_spi_bus(clock_speed_hz: u32, bus: spi::Bus, num_pixels: usize) -> Result<Blinkt> {
+        Ok(Blinkt {
+            serial_output: Box::new(BlinktSpi::with_bus(clock_speed_hz, bus)?),
             pixels: vec![Pixel::default(); num_pixels],
             clear_on_drop: true,
             end_frame: vec![0u8; 4 + (((num_pixels as f32 / 16.0f32) + 0.94f32) as usize)],
